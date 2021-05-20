@@ -12,6 +12,9 @@ router.get("/", async (req, res) => {
         {
           model: Product,
         },
+        {
+          model: ProductTag
+        }
       ],
     });
     res.json(tagData);
@@ -32,6 +35,7 @@ router.get("/:id", async (req, res) => {
         {
           model: Product,
         },
+        
       ],
     });
     res.json(tagData);
