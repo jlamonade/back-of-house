@@ -10,10 +10,7 @@ router.get("/", async (req, res) => {
     const tagData = await Tag.findAll({
       include: [
         {
-          model: 'product',
-        },
-        {
-          model: 'product_tag',
+          model: Product,
         },
       ],
     });
@@ -33,10 +30,7 @@ router.get("/:id", async (req, res) => {
       },
       include: [
         {
-          model: "product",
-        },
-        {
-          model: 'product_tag',
+          model: Product,
         },
       ],
     });
