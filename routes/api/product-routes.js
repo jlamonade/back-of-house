@@ -33,7 +33,7 @@ router.get("/:id", async (req, res) => {
     const productData = await Product.findByPk(
       req.params.id,
       {
-        includes: [
+        include: [
           {
             model: Tag,
           },
