@@ -44,8 +44,8 @@ Product.init(
       references: {
         model: Category, // references another model
         key: "id", // column name of the referenced model
-      }
-    }
+      },
+    },
   },
   {
     sequelize,
