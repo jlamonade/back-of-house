@@ -132,7 +132,8 @@ router.delete("/:id", async (req, res) => {
         id: req.params.id,
       },
     });
-    res.json(productData);
+    if (!productData) res.status(404).send("404 Products Not Found");
+    else res.json(productData);
   } catch (err) {
     res.status(500).send("500 Internal Server Error.");
   }
