@@ -35,7 +35,7 @@ router.get("/:id", async (req, res) => {
       },
     });
     if (!categoryData) res.status(404).send("404 Product Not Found.")
-    res.json(categoryData);
+    else res.json(categoryData);
   } catch (err) {
     res.status(500).send("500 Internal Server Error.");
   }
@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
       category_name: req.body.category_name,
     });
     if (!categoryData) res.status(404).send("404 Product Not Found.")
-    res.json(categoryData);
+    else res.json(categoryData);
   } catch (err) {
     res.status(500).send("500 Internal Server Error.");
   }
@@ -68,7 +68,7 @@ router.put("/:id", async (req, res) => {
       }
     );
     if (!categoryData) res.status(404).send("404 Product Not Found.")
-    res.json(categoryData);
+    else res.json(categoryData);
   } catch (err) {
     res.status(500).send("500 Internal Server Error.");
   }
@@ -83,7 +83,7 @@ router.delete("/:id", async (req, res) => {
       },
     });
     if (!categoryData) res.status(404).send("404 Product Not Found.")
-    res.json(categoryData);
+    else res.json(categoryData);
   } catch (err) {
     res.status(500).send("500 Internal Server Error.");
   }
