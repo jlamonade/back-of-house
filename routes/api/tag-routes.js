@@ -14,7 +14,8 @@ router.get("/", async (req, res) => {
         },
       ],
     });
-    res.json(tagData);
+    if (tagData.length < 1) res.status(404).send("404 No Tags Found.");
+    else res.json(tagData);
   } catch (err) {
     res.status(500).send("500 Internal Server Error.");
   }
@@ -34,7 +35,8 @@ router.get("/:id", async (req, res) => {
         },
       ],
     });
-    res.json(tagData);
+    if (tagData.length < 1) res.status(404).send("404 No Tags Found.");
+    else res.json(tagData);
   } catch (err) {
     res.status(500).send("500 Internal Server Error.");
   }
@@ -68,7 +70,8 @@ router.put("/:id", async (req, res) => {
       },
       { where: { id: req.params.id } }
     );
-    res.json(tagData);
+    if (tagData.length < 1) res.status(404).send("404 No Tags Found.");
+    else res.json(tagData);
   } catch (err) {
     res.status(500).send("500 Internal Server Error.");
   }
@@ -78,7 +81,8 @@ router.delete("/:id", async (req, res) => {
   // delete on tag by its `id` value
   try {
     const tagData = await Tag.destroy({ where: { id: req.params.id } });
-    res.json(tagData);
+    if (tagData.length < 1) res.status(404).send("404 No Tags Found.");
+    else res.json(tagData);
   } catch (err) {
     res.status(500).send("500 Internal Server Error.");
   }
