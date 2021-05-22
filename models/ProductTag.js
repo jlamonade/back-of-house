@@ -12,6 +12,10 @@ ProductTag.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    /* 
+    many to many relationships need a through model with both foreign keys 
+    to associate the two data tables
+    */
     product_id: {
       type: DataTypes.INTEGER,
       references: {
