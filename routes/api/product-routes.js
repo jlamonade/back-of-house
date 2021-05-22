@@ -10,14 +10,19 @@ router.get("/", async (req, res) => {
   try {
     const productData = await Product.findAll({
       include: [
+        /* 
+          includes the two models that need to be displayed 
+          along with the product data
+        */
         {
           model: Tag,
         },
         {
           model: Category,
-        }
+        },
       ],
     });
+    // 404 if product data is falsy
     if (!productData) res.status(404).send("404 Products Not Found");
     else res.json(productData);
   } catch (err) {
@@ -30,19 +35,20 @@ router.get("/:id", async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   try {
-    const productData = await Product.findByPk(
-      req.params.id,
-      {
-        include: [
-          {
-            model: Tag,
-          },
-          {
-            model: Category,
-          }
-        ],
-      }
-    );
+    const productData = await Product.findByPk(req.params.id, {
+      include: [
+        /* 
+          includes the two models that need to be displayed 
+          along with the product data
+        */
+        {
+          model: Tag,
+        },
+        {
+          model: Category,
+        },
+      ],
+    });
     if (productData.length < 1) res.status(404).send("404 Products Not Found");
     else res.json(productData);
   } catch (err) {
@@ -129,7 +135,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const productData = await Product.destroy({
       where: {
-        id: req.params.id,
+        id: req.params.id, // deletes product row where specified by id
       },
     });
     if (!productData) res.status(404).send("404 Products Not Found");

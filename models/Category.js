@@ -16,7 +16,7 @@ Category.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: true,
+        notNull: true, // added extra layer of validation
       }
     }
   },

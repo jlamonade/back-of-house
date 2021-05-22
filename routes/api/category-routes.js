@@ -10,11 +10,13 @@ router.get("/", async (req, res) => {
     const categoryData = await Category.findAll({
       include: [
         {
-          model: Product,
+          model: Product, // includes associated products
         },
       ],
     });
-    res.json(categoryData);
+    // 404 error if data cannot be retrieved but server and database work
+    if (!categoryData) res.status(404).send("404 No Products Found.")
+    else res.json(categoryData);
   } catch (err) {
     res.status(500).send("500 Internal Server Error.");
   }
@@ -47,8 +49,7 @@ router.post("/", async (req, res) => {
     const categoryData = await Category.create({
       category_name: req.body.category_name,
     });
-    if (!categoryData) res.status(404).send("404 Product Not Found.")
-    else res.json(categoryData);
+    res.json(categoryData);
   } catch (err) {
     res.status(500).send("500 Internal Server Error.");
   }
@@ -59,11 +60,11 @@ router.put("/:id", async (req, res) => {
   try {
     const categoryData = await Category.update(
       {
-        category_name: req.body.category_name,
+        category_name: req.body.category_name, // changes category name of row...
       },
       {
         where: {
-          id: req.params.id,
+          id: req.params.id, // ...where id is equal to specified id in url
         },
       }
     );
@@ -79,7 +80,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const categoryData = await Category.destroy({
       where: {
-        id: req.params.id,
+        id: req.params.id, // deletes data at row where id is equal to specified id
       },
     });
     if (!categoryData) res.status(404).send("404 Product Not Found.")

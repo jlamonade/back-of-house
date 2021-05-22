@@ -9,11 +9,13 @@ router.get("/", async (req, res) => {
   try {
     const tagData = await Tag.findAll({
       include: [
+        // includes associated products in output
         {
           model: Product,
         },
       ],
     });
+    // 404 is tagData is empty
     if (tagData.length < 1) res.status(404).send("404 No Tags Found.");
     else res.json(tagData);
   } catch (err) {
@@ -26,6 +28,7 @@ router.get("/:id", async (req, res) => {
   // be sure to include its associated Product data
   try {
     const tagData = await Tag.findAll({
+      // finds tag by id specified in url
       where: {
         id: req.params.id,
       },
@@ -49,11 +52,6 @@ router.post("/", async (req, res) => {
       {
         tag_name: req.body.tag_name,
       },
-      {
-        where: {
-          id: req.params.id,
-        },
-      }
     );
     res.json(tagData);
   } catch (err) {
